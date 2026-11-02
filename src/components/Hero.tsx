@@ -1,6 +1,8 @@
 import { useEffect, useRef, useState, type ReactNode } from 'react'
 import { AnimatePresence, motion, useMotionValue, useScroll, useSpring, useTransform } from 'motion/react'
 import { profile } from '../data/cv'
+import ApiCard from './ApiCard'
+import PhoneMock from './PhoneMock'
 import { ArrowIcon, Magnetic } from './ui'
 
 const words = ['mobile apps', 'websites', 'backends', 'APIs', 'admin panels', 'anything']
@@ -28,66 +30,6 @@ function RotatingWord() {
         </motion.span>
       </AnimatePresence>
     </span>
-  )
-}
-
-function Phone() {
-  return (
-    <div className="relative h-[440px] w-[215px] rounded-[2.6rem] border border-white/15 bg-[#0c0c14] p-2.5 shadow-[0_40px_80px_-20px_rgb(0_0_0/0.6)]">
-      <div className="relative h-full w-full overflow-hidden rounded-[2.1rem] bg-gradient-to-b from-[#16162a] to-[#0d0d18]">
-        <div className="absolute top-2 left-1/2 h-5 w-20 -translate-x-1/2 rounded-full bg-black" />
-        <div className="px-4 pt-10 text-white">
-          <div className="flex items-center justify-between">
-            <div>
-              <p className="text-[9px] text-white/50">Good morning</p>
-              <p className="font-display text-sm font-bold">Your App</p>
-            </div>
-            <div className="size-7 rounded-full bg-gradient-to-br from-violet to-cyan" />
-          </div>
-          <motion.div
-            className="mt-4 rounded-2xl bg-gradient-to-br from-violet to-cyan p-3.5"
-            animate={{ backgroundPosition: ['0% 50%', '100% 50%', '0% 50%'] }}
-            transition={{ duration: 6, repeat: Infinity }}
-          >
-            <p className="text-[9px] text-white/80">This week</p>
-            <p className="font-display text-2xl font-bold">+128%</p>
-            <div className="mt-2 flex h-8 items-end gap-1">
-              {[40, 65, 35, 80, 55, 95, 70].map((h, i) => (
-                <motion.span
-                  key={i}
-                  className="flex-1 rounded-sm bg-white/70"
-                  initial={{ height: 0 }}
-                  animate={{ height: `${h}%` }}
-                  transition={{ delay: 1.2 + i * 0.08, duration: 0.6, ease }}
-                />
-              ))}
-            </div>
-          </motion.div>
-          <div className="mt-4 space-y-2.5">
-            {[0, 1, 2].map((i) => (
-              <motion.div
-                key={i}
-                className="flex items-center gap-2.5 rounded-xl bg-white/5 p-2.5"
-                initial={{ opacity: 0, x: 20 }}
-                animate={{ opacity: 1, x: 0 }}
-                transition={{ delay: 1.6 + i * 0.12 }}
-              >
-                <span className={`size-7 rounded-lg ${['bg-lime', 'bg-violet', 'bg-cyan'][i]}`} />
-                <span className="flex-1 space-y-1">
-                  <span className="block h-1.5 w-3/4 rounded bg-white/30" />
-                  <span className="block h-1.5 w-1/2 rounded bg-white/15" />
-                </span>
-              </motion.div>
-            ))}
-          </div>
-        </div>
-        <div className="absolute inset-x-3 bottom-3 flex justify-around rounded-2xl bg-white/5 py-2.5 backdrop-blur">
-          {[0, 1, 2, 3].map((i) => (
-            <span key={i} className={`size-1.5 rounded-full ${i === 0 ? 'bg-lime' : 'bg-white/30'}`} />
-          ))}
-        </div>
-      </div>
-    </div>
   )
 }
 
@@ -169,33 +111,21 @@ function Devices() {
           <Browser />
         </div>
         <div className="absolute top-12 right-4 [transform:translateZ(60px)_rotate(5deg)]">
-          <Phone />
+          <PhoneMock />
         </div>
         <motion.div
-          className="absolute bottom-6 -left-2 w-64 rounded-2xl border border-white/10 bg-[#0c0c14]/95 p-4 font-mono text-[11px] text-white/80 shadow-2xl [transform:translateZ(80px)_rotate(-2deg)]"
+          className="absolute bottom-2 -left-10 rotate-[-2deg]"
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.1, duration: 0.8, ease }}
         >
-          <p>
-            <span className="text-cyan">GET</span> /api/orders
-          </p>
-          <p className="mt-1.5 flex items-center gap-2">
-            <span className="size-1.5 rounded-full bg-lime" />
-            <span className="text-lime">200 OK</span>
-            <span className="text-white/40">· 48ms</span>
-          </p>
-          <p className="mt-2 text-white/50">
-            {'{ '}
-            <span className="text-violet">"status"</span>: <span className="text-white/80">"shipped"</span>
-            {' }'}
-          </p>
+          <ApiCard />
         </motion.div>
         <Chip className="top-0 right-0">Flutter</Chip>
         <Chip className="-top-2 left-10" delay={0.2}>
           React · Next.js
         </Chip>
-        <Chip className="bottom-[10.5rem] left-24" delay={0.3}>
+        <Chip className="bottom-[13.5rem] left-28" delay={0.3}>
           .NET
         </Chip>
         <Chip className="right-6 bottom-0" delay={0.4}>
@@ -241,46 +171,29 @@ export default function Hero() {
 
       <motion.div style={{ y, opacity }} className="relative mx-auto grid max-w-7xl grid-cols-[minmax(0,1fr)] items-center gap-6 px-4 sm:px-6 lg:grid-cols-[1.1fr_1fr]">
         <div>
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.8, ease }}
-            className="mb-8 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/60 py-1.5 pr-4 pl-1.5 text-xs font-medium backdrop-blur"
+          <p
+            className="animate-enter mb-8 inline-flex items-center gap-2.5 rounded-full border border-line bg-surface/60 py-1.5 pr-4 pl-1.5 text-xs font-medium backdrop-blur"
           >
             <span className="rounded-full bg-lime px-2 py-0.5 font-mono text-[10px] font-bold text-[#0b0b10] uppercase">Open</span>
             Taking new freelance projects
-          </motion.p>
+          </p>
 
           <h1 className="font-display text-[clamp(3.2rem,8.5vw,7rem)] leading-[0.95] font-extrabold tracking-[-0.045em]">
             {['I build', null, 'end to end.'].map((line, i) => (
               <span key={i} className="block overflow-hidden pb-[0.06em]">
-                <motion.span
-                  className="block"
-                  initial={{ y: '105%' }}
-                  animate={{ y: 0 }}
-                  transition={{ duration: 1, ease, delay: 0.15 + i * 0.12 }}
-                >
+                <span className="animate-rise block" style={{ animationDelay: `${0.1 + i * 0.1}s` }}>
                   {line ?? <RotatingWord />}
-                </motion.span>
+                </span>
               </span>
             ))}
           </h1>
 
-          <motion.p
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease, delay: 0.6 }}
-            className="mt-8 max-w-lg text-lg leading-relaxed text-muted sm:text-xl"
-          >
+          {/* LCP element: slides in but never starts transparent */}
+          <p className="animate-nudge mt-8 max-w-lg text-lg leading-relaxed text-muted sm:text-xl" style={{ animationDelay: '0.3s' }}>
             {profile.tagline}
-          </motion.p>
+          </p>
 
-          <motion.div
-            initial={{ opacity: 0, y: 20 }}
-            animate={{ opacity: 1, y: 0 }}
-            transition={{ duration: 0.9, ease, delay: 0.75 }}
-            className="mt-10 flex flex-wrap items-center gap-3"
-          >
+          <div className="animate-enter mt-10 flex flex-wrap items-center gap-3" style={{ animationDelay: '0.45s' }}>
             <Magnetic>
               <a
                 href="#contact"
@@ -296,7 +209,7 @@ export default function Hero() {
                 See my work
               </a>
             </Magnetic>
-          </motion.div>
+          </div>
         </div>
 
         <div className="-mb-40 flex justify-center sm:-mb-12 lg:mb-0">

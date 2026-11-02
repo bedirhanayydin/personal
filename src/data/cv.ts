@@ -6,18 +6,18 @@ export const profile = {
   github: 'https://github.com/bedirhanayydin',
   linkedin: 'https://linkedin.com/in/bedirhan-aydın-56530b1a2',
   tagline:
-    'From the database to the App Store — I design, build and ship complete products: mobile apps, websites, backends, admin panels and everything in between.',
+    'One developer. Every layer. Zero hand-offs. I design the database, write the API, build the mobile app and the website — and take it all the way to production.',
   about: [
-    'I am a software developer with years of experience building scalable, high-performance products across retail, public sector, healthcare and corporate projects — mobile apps for iOS, Android and Huawei, web apps, and the backends that power them.',
-    'As a freelancer I work directly with you, without layers in between. Whatever the project needs — app, website, API, admin panel or integration — I turn your idea into clean, maintainable code, ship it, and stay around for the next version.',
+    'I’m a full-stack developer — I don’t stop at the screen. I design the database, write the .NET API, build the Flutter or native mobile app and the React / Next.js website, then wire it all together into one product that works — including apps for PAX and Zebra handhelds, barcode scanners and label printers.',
+    'Years of shipping for retail, public sector, healthcare and corporate teams taught me how every layer fits. As a freelancer I bring that to you directly — no agencies, no hand-offs — and I stay around for the next version.',
   ],
 }
 
 export const services = [
   {
     title: 'Mobile apps',
-    body: 'Cross-platform apps with Flutter, or native with SwiftUI and Java — for iOS, Android and Huawei, ready for the stores.',
-    points: ['Flutter', 'SwiftUI', 'Java', 'Firebase', 'Supabase'],
+    body: 'Cross-platform apps with Flutter, or native with SwiftUI and Java — for iOS, Android, Huawei and PAX & Zebra handheld terminals — ready for the app stores and for use in stores.',
+    points: ['Flutter', 'SwiftUI', 'Java', 'Firebase', 'Supabase', 'Handheld terminals', 'PAX', 'Zebra', 'Barcode scanners', 'Label printers', 'Card payments'],
   },
   {
     title: 'Websites & web apps',
@@ -26,18 +26,24 @@ export const services = [
   },
   {
     title: 'Backend & APIs',
-    body: 'Secure, scalable backends and REST APIs with .NET and C# on PostgreSQL or MySQL, plus auth and third-party integrations.',
-    points: ['.NET', 'C#', 'PostgreSQL', 'MySQL', 'REST APIs'],
+    body: 'Secure, scalable backends and REST APIs with .NET on PostgreSQL or MySQL, plus auth and third-party integrations.',
+    points: ['.NET', 'PostgreSQL', 'MySQL', 'REST APIs', 'Auth'],
+  },
+  {
+    title: 'Handheld & retail devices',
+    visual: 'pax',
+    body: 'Apps for PAX and Zebra handheld terminals in stores — barcode scanning, Zebra label printing, card payments and in-store workflows, tuned for the hardware.',
+    points: ['PAX', 'Zebra', 'Barcode scanners', 'Label printers', 'Card payments'],
   },
   {
     title: 'End-to-end products',
-    body: 'Mobile, web and backend delivered as one product — every piece designed to fit together from day one.',
-    points: ['Architecture', 'Integrations', 'Maps & GIS', 'Multi-language'],
+    body: 'Mobile, web and backend delivered as one product — with the integrations real products need, wired in from day one.',
+    points: ['Push notifications', 'Payments', 'Maps & GIS', 'Multi-language'],
   },
   {
     title: 'Care & new versions',
-    body: 'Bug fixes, new features and releases after launch, plus rescue work on existing codebases.',
-    points: ['Maintenance', 'Refactoring', 'Docker', 'Azure DevOps'],
+    body: 'Automated builds and releases, bug fixes and new features after launch, plus rescue work on existing codebases.',
+    points: ['CI/CD', 'Maintenance', 'Refactoring', 'Docker', 'Azure DevOps'],
   },
 ]
 
@@ -67,13 +73,14 @@ export const experience: Experience[] = [
     summary:
       'Building internal and customer-facing Flutter apps for one of Türkiye’s leading luxury retailers.',
     points: [
-      'Develop apps for in-store handheld terminals such as PAX and Zebra, optimized for enterprise and retail hardware.',
+      'Develop apps for PAX and Zebra handheld terminals used in stores — barcode scanning, Zebra label printing and in-store retail workflows.',
+      'Integrate barcode scanners and Zebra label printers, tuning apps for enterprise and retail hardware.',
       'Build internal corporate applications working directly with the CTO and directors.',
       'Translate UX/UI designs into Flutter, using REST APIs, Clean Architecture and MVVM.',
-      'Ship releases to the App Store, Google Play and Huawei AppGallery; push, analytics and deployment via OneSignal and Firebase.',
+      'Push notifications and analytics with OneSignal and Firebase; CI/CD pipelines for releases to the App Store, Google Play and Huawei AppGallery.',
       'Mentor interns with technical guidance and development support.',
     ],
-    tags: ['Flutter', 'PAX', 'Zebra', 'OneSignal', 'Firebase', 'TFS'],
+    tags: ['Flutter', 'PAX', 'Zebra', 'Barcode scanners', 'Label printers', 'Push notifications', 'CI/CD', 'OneSignal', 'Firebase', 'TFS'],
   },
   {
     company: 'Netix Bilişim Teknolojileri',

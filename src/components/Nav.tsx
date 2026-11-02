@@ -1,12 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useEffect, useState, type MouseEvent } from 'react'
+import { flushSync } from 'react-dom'
 import { AnimatePresence, motion, useScroll, useSpring } from 'motion/react'
 import Logo from './Logo'
 
 const links = [
+  { id: 'about', label: 'About' },
   { id: 'services', label: 'Services' },
   { id: 'work', label: 'Work' },
   { id: 'process', label: 'Process' },
-  { id: 'about', label: 'About' },
 ]
 
 function currentTheme(): 'light' | 'dark' {
@@ -16,17 +17,37 @@ function currentTheme(): 'light' | 'dark' {
 }
 
 function ThemeToggle() {
-  const [theme, setTheme] = useState<'light' | 'dark'>(currentTheme)
+  // Prerendered as dark; the real theme is read once we're in the browser
+  const [theme, setTheme] = useState<'light' | 'dark'>('dark')
+  useEffect(() => setTheme(currentTheme()), [])
 
-  const toggle = () => {
+  const toggle = (e: MouseEvent<HTMLButtonElement>) => {
     const next = theme === 'dark' ? 'light' : 'dark'
-    document.documentElement.dataset.theme = next
+    const apply = () => {
+      document.documentElement.dataset.theme = next
+      flushSync(() => setTheme(next))
+    }
     try {
       localStorage.setItem('theme', next)
     } catch {
       // storage unavailable; theme still applies for this visit
     }
-    setTheme(next)
+
+    if (!document.startViewTransition || matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      apply()
+      return
+    }
+    // Grow the new theme out of the button as a circle
+    const r = e.currentTarget.getBoundingClientRect()
+    const cx = r.left + r.width / 2
+    const cy = r.top + r.height / 2
+    const radius = Math.hypot(Math.max(cx, innerWidth - cx), Math.max(cy, innerHeight - cy))
+    document.startViewTransition(apply).ready.then(() => {
+      document.documentElement.animate(
+        { clipPath: [`circle(0px at ${cx}px ${cy}px)`, `circle(${radius}px at ${cx}px ${cy}px)`] },
+        { duration: 700, easing: 'cubic-bezier(0.22, 1, 0.36, 1)', pseudoElement: '::view-transition-new(root)' },
+      )
+    })
   }
 
   return (
@@ -76,7 +97,7 @@ export default function Nav() {
       },
       { rootMargin: '-45% 0px -50% 0px' },
     )
-    ;[...links.map((l) => l.id), 'contact'].forEach((id) => {
+    ;['top', ...links.map((l) => l.id), 'contact'].forEach((id) => {
       const el = document.getElementById(id)
       if (el) io.observe(el)
     })
@@ -94,12 +115,7 @@ export default function Nav() {
         style={{ scaleX: progress }}
       />
 
-      <motion.header
-        initial={{ y: -80, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        transition={{ duration: 0.9, ease: [0.22, 1, 0.36, 1], delay: 0.2 }}
-        className="fixed inset-x-0 top-4 z-50 px-4"
-      >
+      <header className="animate-drop fixed inset-x-0 top-4 z-50 px-4">
         <nav className="mx-auto flex h-16 max-w-5xl items-center justify-between rounded-full border border-line bg-bg/70 py-2 pr-2 pl-3 shadow-[0_10px_40px_-15px_rgb(0_0_0/0.4)] backdrop-blur-xl">
           <Logo />
 
@@ -136,7 +152,7 @@ export default function Nav() {
             </button>
           </div>
         </nav>
-      </motion.header>
+      </header>
 
       <AnimatePresence>
         {open && (

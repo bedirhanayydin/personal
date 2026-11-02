@@ -3,9 +3,10 @@ import type { ReactNode } from 'react'
 const groups = [
   { label: 'Mobile', items: ['Flutter', 'SwiftUI', 'Java', 'Firebase'] },
   { label: 'Web', items: ['React', 'Next.js', 'Tailwind CSS', 'JavaScript', 'Supabase'] },
-  { label: 'Backend', items: ['.NET', 'C#', 'PostgreSQL', 'MySQL', 'REST APIs'] },
+  { label: 'Backend', items: ['.NET', 'PostgreSQL', 'MySQL', 'REST APIs'] },
+  { label: 'Devices', items: ['PAX', 'Zebra', 'Barcode scanners', 'Label printers'] },
 ]
-const tools = ['Clean Architecture', 'MVVM', 'Docker', 'Azure DevOps', 'Git', 'Agile / Scrum', 'Maps & GIS', 'OneSignal']
+const tools = ['CI/CD', 'Push notifications', 'Payments', 'Clean Architecture', 'MVVM', 'Docker', 'Azure DevOps', 'OneSignal', 'Maps & GIS', 'Agile / Scrum']
 
 function Star() {
   return (

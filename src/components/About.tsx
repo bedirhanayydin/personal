@@ -1,22 +1,29 @@
 import { education, profile } from '../data/cv'
-import { Reveal, Section, spotlight } from './ui'
+import { Reveal, ScrollText, Section, spotlight } from './ui'
 
 const values = [
+  ['Full-stack, for real', 'Database, API, mobile app and website from the same hands — every layer fits because one person built them.'],
   ['One point of contact', 'You talk directly to the developer writing the code — no hand-offs, no account managers.'],
   ['Built to last', 'Clean Architecture, MVVM and tested modules, so your product is easy to grow later.'],
-  ['Ships everywhere', 'App Store, Google Play, AppGallery, the web and your servers — all handled for you.'],
 ]
 
 export default function About() {
   return (
-    <Section id="about" eyebrow="About" title="Hi, I’m Bedirhan">
+    <Section id="about" eyebrow="About · Full-stack developer" title="Hi, I’m Bedirhan">
       <div className="grid gap-6 lg:grid-cols-[1.25fr_1fr]">
         <Reveal className="relative overflow-hidden rounded-[2rem] border border-line bg-surface p-7 sm:p-10">
+          <div className="mb-8 flex flex-wrap items-center gap-2">
+            <span className="rounded-full bg-lime px-3 py-1 font-mono text-[11px] font-bold tracking-widest text-[#0b0b10] uppercase">Full-stack</span>
+            {['Database', 'API', 'Mobile', 'Web'].map((layer, i) => (
+              <span key={layer} className="flex items-center gap-2 font-mono text-xs text-muted">
+                {i > 0 && <span className="text-violet">→</span>}
+                {layer}
+              </span>
+            ))}
+          </div>
           <div className="relative space-y-5 text-lg leading-relaxed sm:text-xl">
             {profile.about.map((p, i) => (
-              <p key={i} className={i ? 'text-muted' : ''}>
-                {p}
-              </p>
+              <ScrollText key={i} text={p} />
             ))}
           </div>
           <div className="relative mt-10 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-line pt-6 font-mono text-xs text-muted">

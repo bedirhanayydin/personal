@@ -1,8 +1,8 @@
 @import 'tailwindcss';
 
 @theme {
-  --font-sans: 'Manrope', ui-sans-serif, system-ui, sans-serif;
-  --font-display: 'Bricolage Grotesque', ui-sans-serif, system-ui, sans-serif;
+  --font-sans: 'Manrope Variable', ui-sans-serif, system-ui, sans-serif;
+  --font-display: 'Bricolage Grotesque Variable', ui-sans-serif, system-ui, sans-serif;
   --font-mono: 'JetBrains Mono', ui-monospace, monospace;
 
   --color-bg: var(--bg);
@@ -45,6 +45,42 @@
       transform: translateY(-12px);
     }
   }
+}
+
+/* Hero entrance runs in CSS so it starts with the prerendered HTML, before JS */
+@keyframes enter {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+}
+@keyframes rise {
+  from {
+    transform: translateY(105%);
+  }
+}
+@keyframes nudge {
+  from {
+    transform: translateY(16px);
+  }
+}
+@keyframes drop {
+  from {
+    opacity: 0;
+    transform: translateY(-80px);
+  }
+}
+.animate-enter {
+  animation: enter 0.8s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-rise {
+  animation: rise 1s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-nudge {
+  animation: nudge 0.9s cubic-bezier(0.22, 1, 0.36, 1) both;
+}
+.animate-drop {
+  animation: drop 0.9s cubic-bezier(0.22, 1, 0.36, 1) 0.15s both;
 }
 
 @keyframes pan {
@@ -108,6 +144,18 @@ body {
   -webkit-font-smoothing: antialiased;
   overflow-x: clip;
   transition: background-color 0.4s ease, color 0.4s ease;
+}
+
+.custom-cursor,
+.custom-cursor * {
+  cursor: none !important;
+}
+
+/* Theme switch: new theme grows out of the toggle as a circle */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
 }
 
 ::selection {

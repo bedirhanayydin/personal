@@ -45,10 +45,11 @@ function Cover({ project, index }: { project: Project; index: number }) {
 }
 
 function useIsDesktop() {
-  const [desktop, setDesktop] = useState(() => matchMedia('(min-width: 768px)').matches)
+  const [desktop, setDesktop] = useState(false)
   useEffect(() => {
     const mq = matchMedia('(min-width: 768px)')
     const onChange = () => setDesktop(mq.matches)
+    onChange()
     mq.addEventListener('change', onChange)
     return () => mq.removeEventListener('change', onChange)
   }, [])
@@ -93,6 +94,7 @@ function Card({ project, index, total, progress, stacked }: { project: Project; 
                     href={href}
                     target="_blank"
                     rel="noreferrer"
+                    data-cursor="Open"
                     className="group inline-flex items-center gap-2 rounded-full bg-ink px-4 py-2.5 text-sm font-semibold text-bg transition hover:scale-[1.04]"
                   >
                     {label}
@@ -114,7 +116,7 @@ export default function Work() {
   const stacked = useIsDesktop()
 
   return (
-    <Section id="work" eyebrow="Selected work" title="A few things I’ve built" intro="Just a handful of examples 😃 — not the full list. Here are some products I’ve shipped to the App Store and Google Play.">
+    <Section id="work" eyebrow="Selected work" title="A few things I’ve built" intro="Just a handful of examples — not the full list. Here are some products I’ve shipped to the App Store and Google Play.">
       <div ref={ref} className="space-y-8 md:space-y-[18vh]">
         {projects.map((p, i) => (
           <Card key={p.name} project={p} index={i} total={projects.length} progress={scrollYProgress} stacked={stacked} />

@@ -13,7 +13,7 @@ React 19 · TypeScript · Vite · Tailwind CSS v4 · Motion
 ```bash
 npm install
 npm run dev      # local dev server
-npm run build    # production build into dist/
+npm run build    # production build into dist/ (HTML prerendered)
 firebase deploy  # publish dist/ to Firebase Hosting (project: bedirhanaydin-dev)
 ```
 

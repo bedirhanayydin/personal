@@ -17,6 +17,7 @@ export default function Experience() {
                 <button
                   onClick={() => setOpen(isOpen ? -1 : i)}
                   aria-expanded={isOpen}
+                  data-cursor={isOpen ? 'Close' : 'Open'}
                   className="group grid w-full grid-cols-[1fr_auto] items-center gap-4 py-7 text-left md:grid-cols-[12rem_1fr_auto] md:gap-10"
                 >
                   <span className="hidden font-mono text-sm text-muted md:block">{job.period}</span>

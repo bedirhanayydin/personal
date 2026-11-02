@@ -1,15 +1,18 @@
 import { useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import { profile } from '../data/cv'
+import Confetti from './Confetti'
 import { ArrowIcon, GitHubIcon, LinkedInIcon, Magnetic, Reveal, SplitWords } from './ui'
 
 export default function Contact() {
   const [copied, setCopied] = useState(false)
+  const [bursts, setBursts] = useState(0)
 
   const copy = async () => {
     try {
       await navigator.clipboard.writeText(profile.email)
       setCopied(true)
+      setBursts((b) => b + 1)
       setTimeout(() => setCopied(false), 1800)
     } catch {
       window.location.href = `mailto:${profile.email}`
@@ -42,14 +45,16 @@ export default function Contact() {
               </span>
             </h2>
             <Reveal delay={0.3} className="mt-8 max-w-lg text-lg text-white/70">
-              Tell me what you want to build — a mobile app, a website or both. I’ll get back to you with next steps.
+              Tell me what you want to build — a mobile app, a website, a backend or all of it. I’ll get back to you with next steps.
             </Reveal>
 
             <Reveal delay={0.4} className="mt-10 flex flex-wrap items-center gap-3">
               <button
                 onClick={copy}
+                data-cursor="Copy"
                 className="group relative inline-flex items-center gap-3 rounded-full border border-white/20 bg-white/5 px-5 py-3.5 font-mono text-sm backdrop-blur transition hover:border-white/50"
               >
+                {bursts > 0 && <Confetti key={bursts} />}
                 {profile.email}
                 <span className="relative inline-grid h-5 w-14 overflow-hidden rounded-full bg-white/10 text-[10px] uppercase">
                   <AnimatePresence mode="wait" initial={false}>
@@ -87,6 +92,7 @@ export default function Contact() {
             <Magnetic strength={0.5}>
               <a
                 href={`mailto:${profile.email}?subject=${encodeURIComponent('New project')}`}
+                data-cursor="Mail"
                 className="group relative grid size-44 place-items-center rounded-full bg-[#d4ff3a] text-center font-display text-lg leading-tight font-bold text-[#0b0b10] transition-transform duration-500 hover:scale-110 sm:size-52"
               >
                 <svg viewBox="0 0 200 200" className="animate-spin-slow absolute inset-0 size-full" aria-hidden>
